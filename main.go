@@ -16,27 +16,27 @@ import (
 )
 
 func main() {
-	//создание нового приложения
+	//New application
 	calculator := app.New()
 
-	//графическое окно приложения
+	//Application graphics window
 	window := calculator.NewWindow("calculator")
 	window.Resize(fyne.NewSize(550, 550))
 	calculator.Settings().SetTheme(theme.DarkTheme())
 
-	//ссылки
+	//Links
 	url_1, _ := url.Parse("https://www.desmos.com/scientific")
 	url_2, _ := url.Parse("https://t.me/dvrkv")
 	link_1 := widget.NewHyperlinkWithStyle("more advanced calculator", url_1, fyne.TextAlign(20), fyne.TextStyle{Italic: true})
 	link_2 := widget.NewHyperlinkWithStyle("designed by @dvrkv", url_2, fyne.TextAlign(20), fyne.TextStyle{Italic: true})
 
-	//картинки
+	//Images
 	img_addition := canvas.NewImageFromFile("img/addition.svg")
 	img_subtraction := canvas.NewImageFromFile("img/subtraction.svg")
 	img_multiplication := canvas.NewImageFromFile("img/multiplication.svg")
 	img_division := canvas.NewImageFromFile("img/division.svg")
 
-	//поля ввода
+	//Input fields
 	entry_1 := widget.NewEntry()
 	entry_1.Resize(fyne.NewSize(500, 40))
 	entry_1.Move(fyne.NewPos(20, 30))
@@ -45,23 +45,23 @@ func main() {
 	entry_2.Resize(fyne.NewSize(500, 40))
 	entry_2.Move(fyne.NewPos(20, 80))
 
-	//подсказки ввода
-	entry_1.SetPlaceHolder("Введите первое число...")
-	entry_2.SetPlaceHolder("Введите второе число...")
+	//Input hints
+	entry_1.SetPlaceHolder("Enter the first number...")
+	entry_2.SetPlaceHolder("Enter the second number...")
 
-	//надписи
-	label_name := widget.NewLabel("КАЛЬКУЛЯТОР")
+	//Inscriptions
+	label_name := widget.NewLabel("CALCULATOR")
 	label_name.TextStyle = fyne.TextStyle{Bold: true}
 	label_name.Move(fyne.NewPos(12, 0))
 
-	label_result := widget.NewLabel("Результат")
+	label_result := widget.NewLabel("Result")
 	label_result.Move(fyne.NewPos(12, 180))
 
-	label_theme := widget.NewLabel("ТЕМА")
+	label_theme := widget.NewLabel("THEME")
 	label_theme.TextStyle = fyne.TextStyle{Bold: true}
 	label_theme.Move(fyne.NewPos(12, 320))
 
-	label_links := widget.NewLabel("ССЫЛКИ")
+	label_links := widget.NewLabel("LINKS")
 	label_links.TextStyle = fyne.TextStyle{Bold: true}
 	label_links.Move(fyne.NewPos(12, 340))
 
@@ -69,26 +69,26 @@ func main() {
 	result.TextStyle = fyne.TextStyle{Bold: true}
 	result.Move(fyne.NewPos(12, 210))
 
-	//кнопки
+	//Buttons
 	button_addition := container.New(
 		layout.NewMaxLayout(),
 		img_addition,
 		widget.NewButton("", func() {
-			//конвертация в float64 и получение значений из полей ввода
+			//Converting to float64 and getting values from input fields
 			num_1, err_1 := strconv.ParseFloat(entry_1.Text, 64)
 			num_2, err_2 := strconv.ParseFloat(entry_2.Text, 64)
 			if err_1 != nil || err_2 != nil {
-				//всплывающее диалоговое окно с ошибкой
+				//Popup error dialog box
 				dialog.ShowCustom(
 					"OOOPS :(",
 					"Ok",
-					widget.NewLabel("Ошибка ввода !"),
+					widget.NewLabel("Input Error !"),
 					window,
 				)
 			} else {
 				addition := num_1 + num_2
 
-				//вывод ответа и конвертация в string
+				//Response output and conversion to string
 				result.SetText(fmt.Sprintf("%.2f", addition))
 			}
 		}))
@@ -99,21 +99,21 @@ func main() {
 		layout.NewMaxLayout(),
 		img_subtraction,
 		widget.NewButton("", func() {
-			//конвертация в float64 и получение значений из полей ввода
+			//Converting to float64 and getting values from input fields
 			num_1, err_1 := strconv.ParseFloat(entry_1.Text, 64)
 			num_2, err_2 := strconv.ParseFloat(entry_2.Text, 64)
 			if err_1 != nil || err_2 != nil {
-				//всплывающее диалоговое окно с ошибкой
+				//Popup error dialog box
 				dialog.ShowCustom(
 					"OOOPS :(",
 					"Ok",
-					widget.NewLabel("Ошибка ввода !"),
+					widget.NewLabel("Input Error !"),
 					window,
 				)
 			} else {
 				subtraction := num_1 - num_2
 
-				//вывод ответа и конвертация в string
+				//Response output and conversion to string
 				result.SetText(fmt.Sprintf("%.2f", subtraction))
 			}
 		}))
@@ -124,21 +124,21 @@ func main() {
 		layout.NewMaxLayout(),
 		img_multiplication,
 		widget.NewButton("", func() {
-			//конвертация в float64 и получение значений из полей ввода
+			//Converting to float64 and getting values from input fields
 			num_1, err_1 := strconv.ParseFloat(entry_1.Text, 64)
 			num_2, err_2 := strconv.ParseFloat(entry_2.Text, 64)
 			if err_1 != nil || err_2 != nil {
-				//всплывающее диалоговое окно с ошибкой
+				//Popup error dialog box
 				dialog.ShowCustom(
 					"OOOPS :(",
 					"Ok",
-					widget.NewLabel("Ошибка ввода !"),
+					widget.NewLabel("Input Error !"),
 					window,
 				)
 			} else {
 				multiplication := num_1 * num_2
 
-				//вывод ответа и конвертация в string
+				//Response output and conversion to string
 				result.SetText(fmt.Sprintf("%.2f", multiplication))
 			}
 		}))
@@ -149,47 +149,47 @@ func main() {
 		layout.NewMaxLayout(),
 		img_division,
 		widget.NewButton("", func() {
-			//конвертация в float64 и получение значений из полей ввода
+			//Converting to float64 and getting values from input fields
 			num_1, err_1 := strconv.ParseFloat(entry_1.Text, 64)
 			num_2, err_2 := strconv.ParseFloat(entry_2.Text, 64)
 			if err_1 != nil || err_2 != nil {
-				//всплывающее диалоговое окно с ошибкой
+				//Popup error dialog box
 				dialog.ShowCustom(
 					"OOOPS :(",
 					"Ok",
-					widget.NewLabel("Ошибка ввода !"),
+					widget.NewLabel("Input Error !"),
 					window,
 				)
 			} else if num_2 == 0 {
 				dialog.ShowCustom(
 					"OOOPS :(",
 					"Ok",
-					widget.NewLabel("На 0 делить нельзя !"),
+					widget.NewLabel("I can't divide by 0 !"),
 					window,
 				)
 			} else {
 				division := num_1 / num_2
 
-				//вывод ответа и конвертация в string
+				//Response output and conversion to string
 				result.SetText(fmt.Sprintf("%.2f", division))
 			}
 		}))
 	button_division.Resize(fyne.NewSize(40, 40))
 	button_division.Move(fyne.NewPos(185, 130))
 
-	button_light := widget.NewButton("Светлая", func() {
+	button_light := widget.NewButton("Light", func() {
 		calculator.Settings().SetTheme(theme.LightTheme())
 	})
 	button_light.Resize(fyne.NewSize(95, 40))
 	button_light.Move(fyne.NewPos(20, 360))
 
-	button_dark := widget.NewButton("Темная", func() {
+	button_dark := widget.NewButton("Dark", func() {
 		calculator.Settings().SetTheme(theme.DarkTheme())
 	})
 	button_dark.Resize(fyne.NewSize(95, 40))
 	button_dark.Move(fyne.NewPos(130, 360))
 
-	//панель с цифрами
+	//Panel with numbers
 	n_1 := widget.NewButton("1", func() {
 		entry_1.SetText("1")
 	})
@@ -250,7 +250,7 @@ func main() {
 	n_0.Resize(fyne.NewSize(220, 40))
 	n_0.Move(fyne.NewPos(300, 265))
 
-	//коробки
+	//Boxes
 	box_calculator := container.NewWithoutLayout(
 		label_name,
 		entry_1,
@@ -289,7 +289,7 @@ func main() {
 		n_0,
 	)
 
-	//содержимое окна приложения
+	//Application window content
 	window.SetContent(container.NewWithoutLayout(
 		box_calculator,
 		box_result,
@@ -298,6 +298,6 @@ func main() {
 		box_numbers,
 	))
 
-	//запуск приложения
+	//Application launch
 	window.ShowAndRun()
 }
